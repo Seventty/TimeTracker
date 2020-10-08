@@ -29,14 +29,36 @@ def gettingActiveWindow():
     """We gonna get the info about the active on-time window"""
     
     activeWindowName = None
-    if sys.platform in []:
-        pass
-
-
-
+    if sys.platform in windowsOS:
+        window = windll.user32.GetForegroundWindow()
+        length = windll.user32.GetWindowTextLengthW(window)
+        buff = create_unicode_buffer(length + 1)
+        windll.user32.GetWindowTextW(window, buff, length + 1)
+        if buff.value:
+            activeWindowName = buff.value
+            return activeWindowName
+        else:
+            activeWindowName = None
+    else:
+        print(f"{sys.platform} isn't supported yet, contact an administrator.")
+        return activeWindowName
 
 
 
 """ EndZone """
+print("script seek each 5 secs the task that you're working on\n")
+while True:
+    print(gettingActiveWindow())
+    time.sleep(5)
+    
 
-print(gettingActiveWindow())
+""" Working at this point """    
+
+
+
+
+
+
+
+
+"""Keyboard exception crlt c or z"""
