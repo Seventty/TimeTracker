@@ -6,8 +6,8 @@ import json
 import datetime
 import sys
 from os import system
-from activity import *
-import uiautomation as auto
+from registrer import *
+#import uiautomation as auto
 # Development os block
 windowsOS = ['Windows','win32','cygwin']
 macOS = ['Mac','darwin','os2','os2emx']
