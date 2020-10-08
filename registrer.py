@@ -18,3 +18,15 @@ class TimeEntry:
         self.hours = hours
         self.minutes = minutes
         self.seconds = seconds
+
+    def serialize(self):
+        """ Formating road serialize the obj """
+        return {
+            'start_time': self.start_time.strftime("%Y-%m-%d %H:%M:%S"),
+            'end_time': self.end_time.strftime("%Y-%m-%d %H:%M:%S"),
+            'days': self.days,
+            'hours': self.hours,
+            'minutes': self.minutes,
+            'seconds': self.seconds
+        }
+
