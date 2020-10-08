@@ -6,18 +6,21 @@ import datetime
 import sys
 from os import system
 from activity import *
-# import win32gui
 import uiautomation as auto
+if sys.platform in ['Windows','win32','cygwin']:
+    pass #Pass for now
 
-#Declarative Zone#
+""" Declarative Zone """
+
+activeWindowName = ""
+activityName = ""
+startTime = datetime.datetime.now()
+first_time = True #First time running?
+
+""" Function Zone """
 
 
 
-#Function Zone#
+""" EndZone """
 
-
-
-#EndZone#
-while True:
-    print(getActiveTimeWindow())
-    time.sleep(1)
+print(startTime)
