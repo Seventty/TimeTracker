@@ -1,4 +1,5 @@
 #Tracker powered by Zero more info in github
+from __future__ import print_function
 from typing import Optional
 from ctypes import wintypes, windll, create_unicode_buffer
 import time
@@ -7,7 +8,7 @@ import datetime
 import sys
 from os import system
 from registrer import *
-#import uiautomation as auto
+
 # Development os block
 windowsOS = ['Windows','win32','cygwin']
 macOS = ['Mac','darwin','os2','os2emx']
@@ -17,9 +18,10 @@ linuxOS = ['linux','linux2']
 
 """ Declarative Zone """
 
-activeWindowName = ""
-activityName = ""
-startTime = datetime.datetime.now()
+active_window_name = ""
+activity_name = ""
+start_time = datetime.datetime.now()
+activeList = ActivityList([])
 first_time = True #First time running?
 
 
@@ -28,20 +30,27 @@ first_time = True #First time running?
 def gettingActiveWindow():
     """We gonna get the info about the active on-time window"""
     
-    activeWindowName = None
+    active_window_name_ = None
     if sys.platform in windowsOS:
         window = windll.user32.GetForegroundWindow()
         length = windll.user32.GetWindowTextLengthW(window)
         buff = create_unicode_buffer(length + 1)
         windll.user32.GetWindowTextW(window, buff, length + 1)
         if buff.value:
-            activeWindowName = buff.value
-            return activeWindowName
+            active_window_name_ = buff.value
+            return active_window_name_
         else:
-            activeWindowName = None
+            active_window_name_ = None
     else:
         print(f"{sys.platform} isn't supported yet, contact an administrator.")
-        return activeWindowName
+        return active_window_name_
+
+
+""" Catch no-json with any error jumps """
+try:
+    activeList.initialize_me()
+except Exception:
+    print('No json')
 
 
 
@@ -49,7 +58,7 @@ def gettingActiveWindow():
 print("script seek each 5 secs the task that you're working on\n")
 while True:
     print(gettingActiveWindow())
-    time.sleep(5)
+    time.sleep(2)
     
 
 """ Working at this point """    
