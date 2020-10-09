@@ -50,3 +50,57 @@ class TimeEntry():
             'minutes' : self.minutes,
             'seconds' : self.seconds
         }
+
+class ActivityList():
+    """ This class will be in charge of saving all the data already serialized,
+     formatted and parsed. """
+    def __init__(self, activities):
+        self.activities = activities
+
+    def initialize_me(self):
+        activity_list = ActivityList([])
+        with open('activities.json', 'r') as f:
+            data = json.load(f)
+            activity_list = ActivityList(
+                activities = self.get_activities_from_json(data)
+            )
+        return activity_list
+
+    def get_activities_from_json(self, data):
+        return_list = []
+        for activity in data['activities']:
+            return_list.append(
+                Activity(
+                    name = activity['name'],
+                    time_entries = self.get_entires_from_json(activity),
+                )
+            )
+        self.activities = return_list
+        return return_list
+
+    def get_entires_from_json(self,data):
+        return_list = []
+        for entry in data['time_entries']:
+            return_list.append(
+                TimeEntry(
+                    start_time = parser.parse(entry['start_time']),
+                    end_time = parser.parse(entry['end_time']),
+                    days = entry['days'],
+                    hours = entry['hours'],
+                    minutes = entry['minutes'],
+                    seconds = entry['seconds'],
+                )
+            )
+        self.time_entries = return_list
+        return return_list
+
+    def serialize(self):
+        return{
+            'activities':self.get_activities_to_json()
+        }
+
+    def get_activities_to_json(self):
+        activities_ = []
+        for activity in self.activities:
+            activities_.append(activity.serialize())
+        return activities_
