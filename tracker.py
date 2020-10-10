@@ -19,55 +19,69 @@ linuxOS = ['linux','linux2']
 """ Declarative Zone """
 
 active_window_name = ""
-activity_name = ""
-start_time = datetime.datetime.now()
-activeList = ActivityList([])
-first_time = True #First time running?
+activity_name = "" 
+start_time = datetime.datetime.now() #First time instance
+activeList = AcitivyList([]) # First instance
+first_time = True #First time
 
 
 """ Function Zone """
 
-def gettingActiveWindow():
+def gettin_active_window():
     """We gonna get the info about the active on-time window"""
     
-    active_window_name_ = None
+    _active_window_name = None
     if sys.platform in windowsOS:
         window = windll.user32.GetForegroundWindow()
         length = windll.user32.GetWindowTextLengthW(window)
         buff = create_unicode_buffer(length + 1)
         windll.user32.GetWindowTextW(window, buff, length + 1)
-        if buff.value:
-            active_window_name_ = buff.value
-            return active_window_name_
-        else:
-            active_window_name_ = None
+        _active_window_name = buff.value
+        return _active_window_name
     else:
-        print(f"{sys.platform} isn't supported yet, contact an administrator.")
-        return active_window_name_
+        print(f"Script not supported in {sys.platform} contact an administrator.")
+        return _active_window_name
 
 
-""" Catch no-json with any error jumps """
+# """ Catch no-json with any error jumps """
+# try:
+#     activeList.initialize_me()
+# except Exception:
+#     print('No json')
+
 try:
-    activeList.initialize_me()
-except Exception:
-    print('No json')
+    while True:
+        previous_site = ""
+        if sys.platform not in linuxOS:
+            new_window_name = gettin_active_window()
+
+        if active_window_name != new_window_name:
+            print(active_window_name)
+            activity_name = active_window_name
+
+            if not first_time:
+                end_time = datetime.datetime.now()
+                time_entry = TimeEntry(start_time, end_time,0,0,0,0)
+                time_entry._get_specific_times()    
+                exists = False
+                for registrer in activeList.activities:
+                    if registrer.name == activity_name:
+                        exists = True
+                        registrer.time_entries.append(time_entry)
+
+                if not exists:
+                    registrer = Activity(activity_name, [time_entry])
+                    activeList.activities.append(registrer)
+                with open('activities.json','w') as json_file:
+                    json.dump(activeList.serialize(), json_file, indent=4, sort_keys=True)
+                    start_time = datetime.datetime.now()
+            first_time = False
+            active_window_name = new_window_name
 
 
 
-""" EndZone """
-print("script seek each 5 secs the task that you're working on\n")
-while True:
-    print(gettingActiveWindow())
-    time.sleep(2)
-    
-
-""" Working at this point """    
-
-
-
-
-
-
-
+            time.sleep(10)
+except KeyboardInterrupt:
+    print("Timer stopped")
 
 """Keyboard exception crlt c or z"""
