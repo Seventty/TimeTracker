@@ -1,0 +1,117 @@
+{
+    "activities": [
+        {
+            "name": "C:\\WINDOWS\\system32\\cmd.exe - python  tracker.py",
+            "time_entries": [
+                {
+                    "days": 0,
+                    "end_time": "2020-10-09 22:29:31",
+                    "hours": 0,
+                    "minutes": 0,
+                    "seconds": 22,
+                    "start_time": "2020-10-09 22:29:09"
+                }
+            ]
+        },
+        {
+            "name": "Seleccionar C:\\WINDOWS\\system32\\cmd.exe - python  tracker.py",
+            "time_entries": [
+                {
+                    "days": 0,
+                    "end_time": "2020-10-09 22:29:41",
+                    "hours": 0,
+                    "minutes": 0,
+                    "seconds": 10,
+                    "start_time": "2020-10-09 22:29:31"
+                }
+            ]
+        },
+        {
+            "name": "activities.json - TimeTracker - Visual Studio Code",
+            "time_entries": [
+                {
+                    "days": 0,
+                    "end_time": "2020-10-09 22:30:15",
+                    "hours": 0,
+                    "minutes": 0,
+                    "seconds": 34,
+                    "start_time": "2020-10-09 22:29:41"
+                },
+                {
+                    "days": 0,
+                    "end_time": "2020-10-09 22:30:47",
+                    "hours": 0,
+                    "minutes": 0,
+                    "seconds": 21,
+                    "start_time": "2020-10-09 22:30:25"
+                },
+                {
+                    "days": 0,
+                    "end_time": "2020-10-09 22:33:15",
+                    "hours": 0,
+                    "minutes": 2,
+                    "seconds": 18,
+                    "start_time": "2020-10-09 22:30:57"
+                },
+                {
+                    "days": 0,
+                    "end_time": "2020-10-09 22:33:35",
+                    "hours": 0,
+                    "minutes": 0,
+                    "seconds": 10,
+                    "start_time": "2020-10-09 22:33:25"
+                },
+                {
+                    "days": 0,
+                    "end_time": "2020-10-09 22:35:08",
+                    "hours": 0,
+                    "minutes": 0,
+                    "seconds": 21,
+                    "start_time": "2020-10-09 22:34:47"
+                }
+            ]
+        },
+        {
+            "name": "(181) Cronolog\u00eda completa de Naruto (Manga), parte 1 de 2 - Lalito Rams - YouTube - Opera",
+            "time_entries": [
+                {
+                    "days": 0,
+                    "end_time": "2020-10-09 22:33:25",
+                    "hours": 0,
+                    "minutes": 0,
+                    "seconds": 10,
+                    "start_time": "2020-10-09 22:33:15"
+                },
+                {
+                    "days": 0,
+                    "end_time": "2020-10-09 22:34:27",
+                    "hours": 0,
+                    "minutes": 0,
+                    "seconds": 51,
+                    "start_time": "2020-10-09 22:33:35"
+                },
+                {
+                    "days": 0,
+                    "end_time": "2020-10-09 22:34:47",
+                    "hours": 0,
+                    "minutes": 0,
+                    "seconds": 10,
+                    "start_time": "2020-10-09 22:34:37"
+                }
+            ]
+        },
+        {
+            "name": "TimeTracker/tracker.py at master \u00b7 Seventty/TimeTracker - Opera",
+            "time_entries": [
+                {
+                    "days": 0,
+                    "end_time": "2020-10-09 22:34:37",
+                    "hours": 0,
+                    "minutes": 0,
+                    "seconds": 10,
+                    "start_time": "2020-10-09 22:34:27"
+                }
+            ]
+        }
+    ]
+}
