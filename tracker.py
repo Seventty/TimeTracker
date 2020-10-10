@@ -72,7 +72,7 @@ try:
                 if not exists:
                     registrer = Activity(activity_name, [time_entry])
                     activeList.activities.append(registrer)
-                with open('activities.json','w') as json_file:
+                with open('endpoint.json','w') as json_file:
                     json.dump(activeList.serialize(), json_file, indent=4, sort_keys=True)
                     start_time = datetime.datetime.now()
             first_time = False
