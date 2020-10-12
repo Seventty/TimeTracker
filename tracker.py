@@ -1,4 +1,7 @@
-#Tracker powered by Zero more info in github
+""" Tracker powered by Zero
+    Some issue or problem? Write a message in ZeroSeventty@gmail.com
+"""
+
 from __future__ import print_function
 from typing import Optional
 from ctypes import wintypes, windll, create_unicode_buffer
