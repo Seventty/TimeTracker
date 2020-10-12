@@ -43,45 +43,48 @@ def gettin_active_window():
         return _active_window_name
 
 
-# """ Catch no-json with any error jumps """
-# try:
-#     activeList.initialize_me()
-# except Exception:
-#     print('No json')
+""" Catch no-json with any error jumps """
+try:
+    activeList.initialize_me()
+except Exception:
+    print('Endpoint json, creating one...') #it create a json file if it not exists in the instance running
 
+""" Engine of the timer """
 try:
     while True:
-        previous_site = ""
-        if sys.platform not in linuxOS:
-            new_window_name = gettin_active_window()
+        try:
+            previous_site = ""
+            if sys.platform not in linuxOS:
+                new_window_name = gettin_active_window()
 
-        if active_window_name != new_window_name:
-            print(active_window_name)
-            activity_name = active_window_name
+            if active_window_name != new_window_name:
+                print(active_window_name)
+                activity_name = active_window_name
 
-            if not first_time:
-                end_time = datetime.datetime.now()
-                time_entry = TimeEntry(start_time, end_time,0,0,0,0)
-                time_entry._get_specific_times()    
-                exists = False
-                for registrer in activeList.activities:
-                    if registrer.name == activity_name:
-                        exists = True
-                        registrer.time_entries.append(time_entry)
+                if not first_time:
+                    end_time = datetime.datetime.now()
+                    time_entry = TimeEntry(start_time, end_time,0,0,0,0)
+                    time_entry._get_specific_times()    
+                    exists = False
+                    for registrer in activeList.activities:
+                        if registrer.name == activity_name:
+                            exists = True
+                            registrer.time_entries.append(time_entry)
 
-                if not exists:
-                    registrer = Activity(activity_name, [time_entry])
-                    activeList.activities.append(registrer)
-                with open('endpoint.json','w') as json_file:
-                    json.dump(activeList.serialize(), json_file, indent=4, sort_keys=True)
-                    start_time = datetime.datetime.now()
-            first_time = False
-            active_window_name = new_window_name
+                    if not exists:
+                        registrer = Activity(activity_name, [time_entry])
+                        activeList.activities.append(registrer)
+                    with open('endpoint.json','w') as json_file:
+                        json.dump(activeList.serialize(), json_file, indent=4, sort_keys=True)
+                        start_time = datetime.datetime.now()
 
-
-
-            time.sleep(10)
-except KeyboardInterrupt:
+                first_time = False
+                active_window_name = new_window_name
+                time.sleep(10)
+        except Exception as e:
+            f = open("log.txt","a")
+            f.write(f"Error log catch an error called: {str(e)}")
+            continue #Catch the error if isn't keyboardInterrupt and run again.
+except KeyboardInterrupt: 
     print("Timer stopped")
-
 """Keyboard exception crlt c or z"""

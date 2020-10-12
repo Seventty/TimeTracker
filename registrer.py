@@ -8,6 +8,7 @@ class AcitivyList:
         self.activities = activities
     
     def initialize_me(self):
+        """ Initialize, load and read. """
         activity_list = AcitivyList([])
         with open('endpoint.json', 'r') as f:
             data = json.load(f)
@@ -29,6 +30,7 @@ class AcitivyList:
         return return_list
     
     def get_time_entires_from_json(self, data):
+        """ Get the all entires from json when those are already writed """
         return_list = []
         for entry in data['time_entries']:
             return_list.append(
@@ -76,6 +78,7 @@ class Activity:
 
 
 class TimeEntry:
+    """ Tracker's time base constructor """
     def __init__(self, start_time, end_time, days, hours, minutes, seconds):
         self.start_time = start_time
         self.end_time = end_time
@@ -86,12 +89,14 @@ class TimeEntry:
         self.seconds = seconds
     
     def _get_specific_times(self):
+        """ Specific time """
         self.days, self.seconds = self.total_time.days, self.total_time.seconds
         self.hours = self.days * 24 + self.seconds // 3600
         self.minutes = (self.seconds % 3600) // 60
         self.seconds = self.seconds % 60
 
     def serialize(self):
+        """ Serialization of the time catched """
         return {
             'start_time' : self.start_time.strftime("%Y-%m-%d %H:%M:%S"),
             'end_time' : self.end_time.strftime("%Y-%m-%d %H:%M:%S"),
