@@ -11,6 +11,7 @@ import datetime
 import sys
 import requests
 from os import system
+import subprocess
 from registrer import *
 
 # Development os block
@@ -53,11 +54,8 @@ try:
 except Exception:
     print('Endpoint json, creating one...') #it create a json file if it not exists in the instance running
 
-def post(send):
-    with open('endpoint.json') as endpoint:
-        payload = json.load(endpoint)
-        url = 'http://ptsv2.com/t/ZeroTest-retrete/post'
-        response = requests.post(url, data=json.dumps(payload))
+def post():
+    subprocess.call('node post.js', shell=True)
 
 """ Engine of the timer """
 try:
@@ -91,8 +89,7 @@ try:
                 first_time = False
                 active_window_name = new_window_name
                 time.sleep(10)
-                send = True
-                post(send)
+                post()
         except Exception as e:
             f = open("log.txt","a")
             f.write(f"Error log catch an error called: {str(e)} {datetime.datetime.now()}")
