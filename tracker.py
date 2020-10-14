@@ -9,6 +9,7 @@ import time
 import json
 import datetime
 import sys
+import requests
 from os import system
 from registrer import *
 
@@ -52,6 +53,12 @@ try:
 except Exception:
     print('Endpoint json, creating one...') #it create a json file if it not exists in the instance running
 
+def post(send):
+    with open('endpoint.json') as endpoint:
+        payload = json.load(endpoint)
+        url = 'http://ptsv2.com/t/ZeroTest-retrete/post'
+        response = requests.post(url, data=json.dumps(payload))
+
 """ Engine of the timer """
 try:
     while True:
@@ -84,9 +91,11 @@ try:
                 first_time = False
                 active_window_name = new_window_name
                 time.sleep(10)
+                send = True
+                post(send)
         except Exception as e:
             f = open("log.txt","a")
-            f.write(f"Error log catch an error called: {str(e)}")
+            f.write(f"Error log catch an error called: {str(e)} {datetime.datetime.now()}")
             continue #Catch the error if isn't keyboardInterrupt and run again.
 except KeyboardInterrupt: 
     print("Timer stopped")
