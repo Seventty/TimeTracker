@@ -42,10 +42,10 @@ def gettin_active_window():
         buff = create_unicode_buffer(length + 1)
         windll.user32.GetWindowTextW(window, buff, length + 1)
         _active_window_name = buff.value
-        return _active_window_name
     else:
         print(f"Script not supported in {sys.platform} contact an administrator.")
-        return _active_window_name
+
+    return _active_window_name
 
 
 """ Catch no-json with any error jumps """

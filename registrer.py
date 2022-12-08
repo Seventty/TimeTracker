@@ -18,31 +18,29 @@ class AcitivyList:
         return activity_list
     
     def get_activities_from_json(self, data):
-        return_list = []
-        for activity in data['activities']:
-            return_list.append(
-                Activity(
-                    name = activity['name'],
-                    time_entries = self.get_time_entires_from_json(activity),
-                )
+        return_list = [
+            Activity(
+                name=activity['name'],
+                time_entries=self.get_time_entires_from_json(activity),
             )
+            for activity in data['activities']
+        ]
         self.activities = return_list
         return return_list
     
     def get_time_entires_from_json(self, data):
         """ Get the all entires from json when those are already writed """
-        return_list = []
-        for entry in data['time_entries']:
-            return_list.append(
-                TimeEntry(
-                    start_time = parser.parse(entry['start_time']),
-                    end_time = parser.parse(entry['end_time']),
-                    days = entry['days'],
-                    hours = entry['hours'],
-                    minutes = entry['minutes'],
-                    seconds = entry['seconds'],
-                )
+        return_list = [
+            TimeEntry(
+                start_time=parser.parse(entry['start_time']),
+                end_time=parser.parse(entry['end_time']),
+                days=entry['days'],
+                hours=entry['hours'],
+                minutes=entry['minutes'],
+                seconds=entry['seconds'],
             )
+            for entry in data['time_entries']
+        ]
         self.time_entries = return_list
         return return_list
     
@@ -52,11 +50,7 @@ class AcitivyList:
         }
     
     def activities_to_json(self):
-        activities_ = []
-        for activity in self.activities:
-            activities_.append(activity.serialize())
-        
-        return activities_
+        return [activity.serialize() for activity in self.activities]
 
 
 class Activity:
@@ -71,10 +65,7 @@ class Activity:
         }
     
     def make_time_entires_to_json(self):
-        time_list = []
-        for time in self.time_entries:
-            time_list.append(time.serialize())
-        return time_list
+        return [time.serialize() for time in self.time_entries]
 
 
 class TimeEntry:
